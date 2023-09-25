@@ -9,6 +9,8 @@ public abstract class CommonOpMode extends LinearOpMode {
         waitForStart();
 
         while(opModeIsActive()) {
+            telemetry.addData("IsOpModeActive", true);
+
             runner();
         }
     }
