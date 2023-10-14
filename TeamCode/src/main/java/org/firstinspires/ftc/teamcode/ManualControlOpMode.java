@@ -12,9 +12,11 @@ public class ManualControlOpMode extends CommonOpMode {
         double ly = gamepad.left_stick_y < 0 ? -(Math.pow(-gamepad.left_stick_y, CURVE)) : Math.pow(gamepad.left_stick_y, CURVE);
         double rx = (gamepad.right_stick_x < 0 ? -(Math.pow(-gamepad.right_stick_x, CURVE)) : Math.pow(gamepad.right_stick_x, CURVE)) * TURN_MAX;
 
-        leftFrontMotor.setPower(-lx - ly - rx);
-        leftBackMotor.setPower(lx - ly - rx);
-        rightFrontMotor.setPower(-lx + ly - rx);
-        rightBackMotor.setPower(lx + ly - rx);
+        double denominator = Math.max(Math.abs(ly) + Math.abs(lx) + Math.abs(rx), 1);
+
+        leftFrontMotor.setPower((ly - lx - rx)/denominator);
+        leftBackMotor.setPower((ly + lx - rx)/denominator);
+        rightFrontMotor.setPower((ly + lx + rx)/denominator);
+        rightBackMotor.setPower((ly - lx + rx)/denominator);
     }
 }
