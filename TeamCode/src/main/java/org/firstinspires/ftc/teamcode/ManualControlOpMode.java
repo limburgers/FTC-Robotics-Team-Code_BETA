@@ -18,5 +18,9 @@ public class ManualControlOpMode extends CommonOpMode {
         leftBackMotor.setPower((ly + lx - rx)/denominator);
         rightFrontMotor.setPower((ly + lx + rx)/denominator);
         rightBackMotor.setPower((ly - lx + rx)/denominator);
+
+
+        LLiftMotor.setPower(gamepad.right_stick_y);
+        RLiftMotor.setPower(gamepad.right_stick_y);
     }
 }
