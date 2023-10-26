@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class ManualControlOpMode extends CommonOpMode {
     final double CURVE = 2.5;
     final double TURN_MAX = 0.5;
+    int lpos = 0;
     @Override
     public void runner() {
         double lx = gamepad.left_stick_x < 0 ? -(Math.pow(-gamepad.left_stick_x, CURVE)) : Math.pow(gamepad.left_stick_x, CURVE);
@@ -19,8 +20,19 @@ public class ManualControlOpMode extends CommonOpMode {
         rightFrontMotor.setPower((ly + lx + rx)/denominator);
         rightBackMotor.setPower((ly - lx + rx)/denominator);
 
+        if (gamepad.y)
+            lpos -= 20;
 
-        LLiftMotor.setPower(gamepad.right_stick_y);
-        RLiftMotor.setPower(gamepad.right_stick_y);
+        if (gamepad.a)
+            lpos += 20;
+
+        if (lpos < -840)
+            lpos = -840;
+        else if (lpos > 0)
+            lpos = 0;
+
+        LLiftMotor.setTargetPosition(lpos);
+        RLiftMotor.setTargetPosition(lpos);
+
     }
 }

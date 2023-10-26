@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public abstract class CommonOpMode extends LinearOpMode {
@@ -24,14 +23,17 @@ public abstract class CommonOpMode extends LinearOpMode {
         RLiftMotor = hardwareMap.get(DcMotor.class, "RLiftMotor");
 
         leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
-        leftBackMotor.setDirection(DcMotor.Direction.REVERSE);
+        rightBackMotor.setDirection(DcMotor.Direction.REVERSE);
         RLiftMotor.setDirection(DcMotor.Direction.REVERSE);
 
         LLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        LLiftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        RLiftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LLiftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        RLiftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        LLiftMotor.setPower(0.5);
+        RLiftMotor.setPower(0.5);
 
         gamepad = gamepad1;
 
