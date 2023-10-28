@@ -3,11 +3,13 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public abstract class CommonOpMode extends LinearOpMode {
     protected DcMotor leftFrontMotor, leftBackMotor, rightFrontMotor, rightBackMotor;
 
     protected DcMotor LLiftMotor, RLiftMotor;
+    protected Servo bigArm;
 
     protected Gamepad gamepad;
 
@@ -21,6 +23,7 @@ public abstract class CommonOpMode extends LinearOpMode {
         rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
         LLiftMotor = hardwareMap.get(DcMotor.class, "LLiftMotor");
         RLiftMotor = hardwareMap.get(DcMotor.class, "RLiftMotor");
+        bigArm = hardwareMap.get(Servo.class, "bigArm");
 
         leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -28,6 +31,9 @@ public abstract class CommonOpMode extends LinearOpMode {
 
         LLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        LLiftMotor.setTargetPosition(0);
+        RLiftMotor.setTargetPosition(0);
 
         LLiftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         RLiftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
