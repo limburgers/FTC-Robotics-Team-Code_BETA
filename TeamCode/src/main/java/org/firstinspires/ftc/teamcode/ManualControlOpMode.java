@@ -10,6 +10,7 @@ class CurvedGamepad {
 
     final double CURVE = 2.5;
     final double TURN_MAX = 0.5;
+    double servoPos = 0;
 
     public CurvedGamepad(Gamepad gamepad) {
         this.lx = gamepad.left_stick_x < 0 ? -(Math.pow(-gamepad.left_stick_x, CURVE)) : Math.pow(gamepad.left_stick_x, CURVE);
@@ -46,8 +47,6 @@ public class ManualControlOpMode extends CommonOpMode {
 
         LLiftMotor.setTargetPosition(lPos);
         RLiftMotor.setTargetPosition(lPos);
-
-        double servoPos = 0;
 
         if (gamepad.right_stick_y > 0.1)
             servoPos += 0.01;
