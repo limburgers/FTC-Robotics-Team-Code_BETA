@@ -21,10 +21,10 @@ public class ManualControlOpMode extends CommonOpMode {
         rightBackMotor.setPower((ly - lx + rx)/denominator);
 
         if (gamepad.y)
-            lpos -= 20;
+            lpos -= 2;
 
         if (gamepad.a)
-            lpos += 20;
+            lpos += 2;
 
         if (lpos < -840)
             lpos = -840;
