@@ -10,7 +10,6 @@ class CurvedGamepad {
 
     final double CURVE = 2.5;
     final double TURN_MAX = 0.5;
-    double servoPos = 0;
 
     public CurvedGamepad(Gamepad gamepad) {
         this.lx = gamepad.left_stick_x < 0 ? -(Math.pow(-gamepad.left_stick_x, CURVE)) : Math.pow(gamepad.left_stick_x, CURVE);
@@ -22,6 +21,7 @@ class CurvedGamepad {
 @TeleOp(name = "Driving OpMode")
 public class ManualControlOpMode extends CommonOpMode {
     int lPos = 0;
+    double servoPos = 0;
     @Override
     public void runner() {
         CurvedGamepad cgp = new CurvedGamepad(gamepad1);
