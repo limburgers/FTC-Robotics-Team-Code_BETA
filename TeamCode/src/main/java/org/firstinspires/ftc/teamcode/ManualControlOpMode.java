@@ -21,7 +21,6 @@ class CurvedGamepad {
 @TeleOp(name = "Driving OpMode")
 public class ManualControlOpMode extends CommonOpMode {
     int lPos = 0;
-    double servoPos = 0;
     @Override
     public void runner() {
         CurvedGamepad cgp = new CurvedGamepad(gamepad1);
@@ -35,10 +34,10 @@ public class ManualControlOpMode extends CommonOpMode {
         rightBackMotor.setPower((cgp.ly - cgp.lx + cgp.rx)/denominator);
 
         if (gamepad2.left_stick_y > 0.1)
-            lPos -= 2;
+            lPos += 4;
 
         if (gamepad2.left_stick_y < -0.1)
-            lPos += 2;
+            lPos -= 4;
 
         if (lPos < -835)
             lPos = -835;
@@ -48,14 +47,9 @@ public class ManualControlOpMode extends CommonOpMode {
         LLiftMotor.setTargetPosition(lPos);
         RLiftMotor.setTargetPosition(lPos);
 
-        if (gamepad.right_stick_y > 0.1)
-            servoPos += 0.01;
-        if (gamepad.right_stick_y < -0.1)
-            servoPos -= 0.01;
-
-        if (servoPos > 1)
-            servoPos = 1;
-        else if (servoPos < 0)
+        if (lPos <= -300)
+            servoPos = 0.238;
+        else
             servoPos = 0;
 
         bigArm.setPosition(servoPos);

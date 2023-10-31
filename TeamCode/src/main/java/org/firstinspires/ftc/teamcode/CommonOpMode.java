@@ -11,7 +11,7 @@ public abstract class CommonOpMode extends LinearOpMode {
     protected DcMotor LLiftMotor, RLiftMotor;
     protected Servo bigArm;
 
-    protected Gamepad gamepad;
+    protected double servoPos = 0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -28,6 +28,7 @@ public abstract class CommonOpMode extends LinearOpMode {
         leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotor.Direction.REVERSE);
         RLiftMotor.setDirection(DcMotor.Direction.REVERSE);
+        bigArm.setDirection(Servo.Direction.REVERSE);
 
         LLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RLiftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -41,29 +42,13 @@ public abstract class CommonOpMode extends LinearOpMode {
         LLiftMotor.setPower(0.5);
         RLiftMotor.setPower(0.5);
 
-        gamepad = gamepad1;
-
-        gamepad.reset();
-        gamepad.rumble(500);
-
-        /*
-        leftFrontMotor.setPower(0.5);
-        Thread.sleep(1000);
-        leftFrontMotor.setPower(0);
-        leftBackMotor.setPower(0.5);
-        Thread.sleep(1000);
-        leftBackMotor.setPower(0);
-        rightFrontMotor.setPower(0.5);
-        Thread.sleep(1000);
-        rightFrontMotor.setPower(0);
-        rightBackMotor.setPower(0.5);
-        Thread.sleep(1000);
-        rightBackMotor.setPower(0);
-        */
+        gamepad1.reset();
+        gamepad1.rumble(500);
 
         while(opModeIsActive()) {
             telemetry.addData("Left Lift Pos: ", LLiftMotor.getCurrentPosition());
             telemetry.addData("Right Lift Pos: ", RLiftMotor.getCurrentPosition());
+            telemetry.addData("ServoPos: ", servoPos);
 
             telemetry.update();
 
